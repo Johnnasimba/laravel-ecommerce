@@ -19,3 +19,4 @@ yarn-error.log
 /.vscode
 
 /resources/views/admin-template/*
+/resources/views/ecommerce-frontend-template/*
