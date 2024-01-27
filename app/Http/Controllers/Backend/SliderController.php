@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Slider;
+use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 
 class SliderController extends Controller
 {
+    use ImageUploadTrait;
     /**
      * Display a listing of the resource.
      */
@@ -30,7 +32,7 @@ class SliderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-//            'banner' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
+            'banner' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2024'],
             'type' => ['string', 'max:255'],
             'title' => ['required', 'string', 'max:255'],
             'starting_price' => ['string', 'max:255'],
@@ -41,6 +43,9 @@ class SliderController extends Controller
 
         $slider = new Slider();
 
+        $imagePath = $this->uploadImage($request, 'banner', 'uploads');
+
+        $slider->banner = $imagePath;
         $slider->type = $request->type;
         $slider->title = $request->title;
         $slider->starting_price = $request->starting_price;
@@ -48,12 +53,7 @@ class SliderController extends Controller
         $slider->serial = $request->serial;
         $slider->status = $request->status;
 
-        if ($request->hasFile('banner')) {
-            $image = $request->file('banner');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('uploads/slider'), $imageName);
-            $slider->banner = $imageName;
-        }
+
 
         $slider->save();
 
