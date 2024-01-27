@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 
 class SliderController extends Controller
@@ -28,7 +29,36 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+//            'banner' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
+            'type' => ['string', 'max:255'],
+            'title' => ['required', 'string', 'max:255'],
+            'starting_price' => ['string', 'max:255'],
+            'btn_url' => [ 'string', 'max:255'],
+            'serial' => ['required', 'integer'],
+            'status' => ['required', 'boolean'],
+        ]);
+
+        $slider = new Slider();
+
+        $slider->type = $request->type;
+        $slider->title = $request->title;
+        $slider->starting_price = $request->starting_price;
+        $slider->btn_url = $request->btn_url;
+        $slider->serial = $request->serial;
+        $slider->status = $request->status;
+
+        if ($request->hasFile('banner')) {
+            $image = $request->file('banner');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/slider'), $imageName);
+            $slider->banner = $imageName;
+        }
+
+        $slider->save();
+
+        toastr()->success('Slider created successfully!','success');
+        return redirect()->back();
     }
 
     /**
