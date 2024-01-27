@@ -44,4 +44,19 @@ class UserProfileController extends Controller
         toastr()->success('Profile updated successfully');
         return redirect()->back();
     }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', 'confirmed', 'min:8'],
+        ]);
+
+        $request->user()->update([
+            'password' => bcrypt($request->password),
+        ]);
+
+        toastr()->success('Password updated successfully');
+        return redirect()->back();
+    }
 }

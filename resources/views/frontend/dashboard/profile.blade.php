@@ -35,33 +35,37 @@
 										</div>
 									</div>
 									<div class="col-xl-12">
-										<button class="common_btn mb-4 mt-2" type="submit">upload</button>
+										<button class="common_btn mb-4 mt-2" type="submit">Submit</button>
 									</div>
 								</form>
 								<div class="wsus__dash_pass_change mt-2">
-									<div class="row">
-										<div class="col-xl-4 col-md-6">
-											<div class="wsus__dash_pro_single">
-												<i class="fas fa-unlock-alt"></i>
-												<input type="password" placeholder="Current Password">
+									<form method="POST" action="{{route('user.profile.update.password')}}">
+										@csrf
+										<h4>basic information</h4>
+										<div class="row">
+											<div class="col-xl-4 col-md-6">
+												<div class="wsus__dash_pro_single">
+													<i class="fas fa-unlock-alt"></i>
+													<input type="password" placeholder="Current Password" name="current_password">
+												</div>
+											</div>
+											<div class="col-xl-4 col-md-6">
+												<div class="wsus__dash_pro_single">
+													<i class="fas fa-lock-alt"></i>
+													<input type="password" placeholder="New Password" name="password">
+												</div>
+											</div>
+											<div class="col-xl-4">
+												<div class="wsus__dash_pro_single">
+													<i class="fas fa-lock-alt"></i>
+													<input type="password" placeholder="Confirm Password" name="password_confirmation">
+												</div>
+											</div>
+											<div class="col-xl-12">
+												<button class="common_btn" type="submit">Submit</button>
 											</div>
 										</div>
-										<div class="col-xl-4 col-md-6">
-											<div class="wsus__dash_pro_single">
-												<i class="fas fa-lock-alt"></i>
-												<input type="password" placeholder="New Password">
-											</div>
-										</div>
-										<div class="col-xl-4">
-											<div class="wsus__dash_pro_single">
-												<i class="fas fa-lock-alt"></i>
-												<input type="password" placeholder="Confirm Password">
-											</div>
-										</div>
-										<div class="col-xl-12">
-											<button class="common_btn" type="submit">upload</button>
-										</div>
-									</div>
+									</form>
 								</div>
 							</div>
 						</div>
