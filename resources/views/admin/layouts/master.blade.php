@@ -74,8 +74,8 @@
 <script src="{{asset('backend/assets/modules/jqvmap/dist/maps/jquery.vmap.world.js')}}"></script>
 <script src="{{asset('backend/assets/modules/summernote/summernote-bs4.js')}}"></script>
 <script src="{{asset('backend/assets/modules/chocolat/dist/js/jquery.chocolat.min.js')}}"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min
-.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 
 <!-- Page Specific JS File -->
 <script src="{{asset('backend/assets/js/page/index-0.js')}}"></script>
